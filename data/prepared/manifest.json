@@ -1,0 +1,27 @@
+{
+  "seed": 42,
+  "model": "Qwen/Qwen2.5-0.5B-Instruct",
+  "model_revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+  "dataset": "openai/gsm8k",
+  "dataset_revision": "740312add88f781978c0658806c59bc2815b9866",
+  "system_prompt": "Solve the math problem. Show your reasoning, then end with #### <number> on its own line.",
+  "files": {
+    "validation": {
+      "count": 128,
+      "sha256": "f9bde6d608f710bcc967d2a46203e810dfab3310fe6d63d25a7136897b7fe155"
+    },
+    "sft": {
+      "count": 512,
+      "sha256": "f03bbf8d1d830d0b085e47635111f4f61d2b28da54bd2667efbbd722c2966990"
+    },
+    "rl": {
+      "count": 256,
+      "sha256": "1b3214a5eee79ba22a70985a93676cdc810139e281fd278e6dea407c597433ea"
+    },
+    "test": {
+      "count": 1319,
+      "sha256": "0c08044cb409bb6a63429e3dba31964a76a894eed39354486a51c6d46b34f559"
+    }
+  },
+  "official_test_included": true
+}

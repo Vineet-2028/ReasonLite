@@ -38,7 +38,8 @@ def load_rows(root, split):
     file = root/f'{split}.jsonl'
     if digest(file) != manifest['files'][split]['sha256']:
         raise ValueError(f'Split {split} differs from manifest')
-    rows = [json.loads(s) for s in file.read_text(encoding='utf-8').splitlines()]
+    with file.open(encoding='utf-8') as f:
+        rows = [json.loads(line) for line in f]
     if len(rows) != manifest['files'][split]['count'] or len({r['id'] for r in rows}) != len(rows):
         raise ValueError('Split integrity failure')
     return manifest, rows

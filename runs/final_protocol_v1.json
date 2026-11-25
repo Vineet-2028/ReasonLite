@@ -1,0 +1,27 @@
+{
+  "arms": {
+    "E0": null,
+    "E1": "runs/e1_sft_v2/adapter",
+    "E2": "runs/e2_grpo_correctness_v1/adapter",
+    "E3": "runs/e3_grpo_efficiency_v1/adapter"
+  },
+  "adapter_sha256": {
+    "E0": null,
+    "E1": "5d885ada194f925c2f0ab34a25c503679e47c450b8d32009e775d34c2528360b",
+    "E2": "10a0722e6dbb1eacddf1fa04d1d001835c3050c5363d406545b2ecdc252ed160",
+    "E3": "e1c45de45494bbb603a43ea9418739104ce5a16ab5bb1f714385caabff1e0875"
+  },
+  "manifest_sha256": "3fcde5df1054b269cc4aa4b755e499848564f62d4532e6acde9379e653aa533c",
+  "scorer_sha256": "e907cb9abf179014fe7130040c06077502804d2ef46374b198b2c1c361e6abaa",
+  "evaluator_sha256": "3bb4c075e4004a889e74d618e1605013f5c17116571435a7711f11cd2c011da4",
+  "scoring_version": "final-answer-v2",
+  "selection": "E1 primary efficiency candidate based on validation; report all E0\u2013E3 regardless of test results",
+  "test_n": 1319,
+  "batch_size": 16,
+  "max_new_tokens": 384,
+  "decoding": "greedy",
+  "seed": 42,
+  "calibration": "first 16 validation items per arm; record differences vs previous single-example evaluation; do not tune on test",
+  "training": "none; all existing checkpoints frozen",
+  "halo": "separate supported host recipe; not part of E0\u2013E3 test"
+}

@@ -1,0 +1,4 @@
+# Evidence and frozen source are byte-sensitive. Do not normalize line endings.
+* -text
+*.safetensors binary
+*.png binary

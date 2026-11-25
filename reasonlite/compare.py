@@ -4,11 +4,13 @@ import json
 from pathlib import Path
 from .data import dump_json
 
-KEYS = ['model_revision','split','split_sha256','data_manifest_sha256','n','max_new_tokens','decoding','batch_size','warmup','device','gpu','dtype','torch','transformers']
+KEYS = ['scoring_version','model_revision','split','split_sha256','data_manifest_sha256','n','max_new_tokens','decoding','batch_size','warmup','device','gpu','dtype','torch','transformers']
 def compare(before, after):
     def read(root):
         root = Path(root)
-        return json.loads((root/'metrics.json').read_text()), [json.loads(l) for l in (root/'predictions.jsonl').read_text(encoding='utf-8').splitlines()]
+        with (root/'predictions.jsonl').open(encoding='utf-8') as f:
+            predictions = [json.loads(line) for line in f]
+        return json.loads((root/'metrics.json').read_text()), predictions
     b, br = read(before); a, ar = read(after)
     for k in KEYS:
         if b[k] != a[k]: raise ValueError(f'Evaluation mismatch: {k}')

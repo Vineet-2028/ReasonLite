@@ -1,49 +1,72 @@
-# ReasonLite — efficient post-training for mathematical reasoning
+# ReasonLite
 
-A controlled small-language-model research project. Question: does parameter-efficient supervised training, followed by correctness-first reward optimization, improve mathematical answer accuracy and token efficiency under a small GPU budget?
+**Accuracy–efficiency trade-offs in resource-constrained LLM post-training**
 
-**Status:** v0.1 foundation. Offline tests passed during preparation; actual Qwen baseline, SFT, GRPO, Halo training, and model publication are not yet measured or completed. This is not a new foundation model or a claim of research novelty.
+![Status](https://img.shields.io/badge/status-exploratory%20study-blue) ![GPU](https://img.shields.io/badge/GPU-Tesla%20T4-555555) ![Evaluation](https://img.shields.io/badge/held--out%20predictions-5276-555555)
 
-## Experimental plan
+A reproducible empirical study of Qwen2.5-0.5B-Instruct, completion-only SFT with LoRA, and two GRPO reward designs. The objective is to measure the cost of concise mathematical answers, not to claim a novel algorithm or a superior general-purpose model.
 
-| ID | Treatment | Status |
-|---|---|---|
-| E0 | Qwen2.5-0.5B-Instruct, unchanged | Runnable baseline; not executed |
-| E1 | Completion-only SFT, LoRA rank 8 | Training entry point; GPU verification pending |
-| E2 | E1 + correctness-only GRPO | Planned |
-| E3 | E1 + correctness-first, efficiency-shaped GRPO | Planned |
+**Result:** SFT cut mean output length by **57.78%** and increased correct answers per generated token by **1.82×**, while reducing answer accuracy by **8.95 percentage points** on the official GSM8K test set. Neither exploratory GRPO arm significantly improved accuracy over SFT. All four checkpoints and both favorable and unfavorable results are retained.
 
-E2 and E3 must start from the **same** E1 checkpoint, use the same RL rows, generation budget, update count and seeds. The optional reward implementation is tested independently; no RL training is claimed. See `docs/PROTOCOL.md`.
+## Results: held-out official GSM8K test (n=1,319 per arm)
 
-## Run on a GPU
+| Arm | Correct / 1,319 | Accuracy (95% Wilson CI) | Mean tokens | Correct / 1k tokens | Format | Questions/s |
+|---|---:|---:|---:|---:|---:|---:|
+| E0 | 512 | 38.82% (36.22%–41.48%) | 282.54 | 1.374 | 0.00% | 1.559 |
+| E1 | 394 | 29.87% (27.46%–32.40%) | 119.28 | 2.504 | 94.92% | 1.364 |
+| E2 | 399 | 30.25% (27.83%–32.78%) | 127.15 | 2.379 | 93.63% | 1.324 |
+| E3 | 399 | 30.25% (27.83%–32.78%) | 117.80 | 2.568 | 93.78% | 1.450 |
 
-Use `ReasonLite_Colab.ipynb` (in this archive or separately downloaded). Upload this source archive to the notebook's initial upload cell. Select a GPU runtime before running. Kaggle alternative: enable internet and a GPU, upload this archive as a private dataset and extract it to `/kaggle/working`, then use the same CLI commands from the project root. Free compute is not guaranteed.
+![Held-out accuracy](runs/final_v1/report/accuracy.png)
+![Mean generated tokens](runs/final_v1/report/mean_tokens.png)
 
-Python 3.10–3.12 and CUDA-enabled PyTorch >=2.6 recommended. A single T4 16 GB is the initial target, not a measured requirement. Versions in `requirements.txt` are a fixed API-compatible candidate stack, not a complete transitive lock or security audit. Use an isolated notebook/runtime and check package compatibility before training. Never load untrusted checkpoints.
+E1 was chosen as the primary efficiency candidate on development data. E3 has the highest observed test token-efficiency ratio but is not retroactively selected as the primary model. Batched throughput was lower for the adapted models; token efficiency is **not** a measured inference speedup. Confidence intervals describe question-level uncertainty, not variation across training seeds.
+
+## Experimental design
+
+```mermaid
+flowchart TD
+    E0[Qwen2.5-0.5B-Instruct: E0] --> E1[SFT + LoRA: E1]
+    E1 --> E2[GRPO correctness: E2]
+    E1 --> E3[GRPO correctness + length + format: E3]
+    E0 --> T[Frozen held-out evaluation]
+    E1 --> T
+    E2 --> T
+    E3 --> T
+```
+
+- One Tesla T4; 1,081,344 trainable parameters out of 495,114,112 (0.2184%).
+- Seed 42; 512 SFT, 256 RL pool (64 used per arm), 128 development validation and all 1,319 official test questions.
+- Four completions per RL prompt, 512 total rollouts across E2/E3; independent branches from identical E1 weights.
+- Frozen model/dataset revisions and evaluator/scorer checksums; six paired exact McNemar tests with Holm adjustment.
+
+## Verify the evidence locally (no GPU or model download)
 
 ```bash
-python -m pip install -r requirements.txt
 python -m unittest discover -s tests -v
-python -m reasonlite.data --include-test
-python -m reasonlite.evaluate --device cuda --limit 16 --out runs/e0_smoke
-python -m reasonlite.evaluate --device cuda --limit 128 --out runs/e0_validation
+python -m scripts.audit_evidence
 ```
 
-Run only the smoke and full baseline today. The official test is stored for reproducibility but must not be inspected or evaluated until the protocol is frozen. The manifest pins Hub revisions, selected IDs are reproducible, and split files are checked by SHA-256. Do not rerun preparation over the same directory. Use a new directory for a changed protocol.
+This recomputes scoring, metrics, pairing and reward diagnostics from stored outputs; checks dataset, adapter and protocol hashes; and checks finite saved adapter tensors. It does not replay model generation or training. See [reproduction](docs/REPRODUCIBILITY.md) for GPU commands and [provenance](docs/PROVENANCE.md) for the difference between executed code and release maintenance.
 
-After E0 succeeds, run a two-update smoke SFT in a separate output directory, then the real training recipe:
+## Repository map
 
-```bash
-CUDA_VISIBLE_DEVICES=0 python -m reasonlite.train_sft --out runs/sft_smoke --max-steps 2
-CUDA_VISIBLE_DEVICES=0 python -m reasonlite.train_sft --out runs/sft
-CUDA_VISIBLE_DEVICES=0 python -m reasonlite.evaluate --device cuda --adapter runs/sft/adapter --limit 128 --out runs/e1_validation
-python -m reasonlite.compare runs/e0_validation runs/e1_validation --out runs/e0_vs_e1.json
-```
+| Path | Purpose |
+|---|---|
+| `reasonlite/` | Data, SFT, GRPO, scoring, evaluation and statistics |
+| `data/prepared/` | Frozen benchmark splits and manifest |
+| `runs/` | Validation, model adapters, rollouts and complete held-out evidence |
+| `runs/final_v1/report/` | Original generated report, CSVs, figures and JSON |
+| `docs/RESEARCH_REPORT.md` | Technical report and interpretation |
+| `docs/PROTOCOL.md` | Methods and experimental design |
+| `docs/ERROR_ANALYSIS.md` | Failures, limitations and follow-up work |
+| `docs/MODEL_CARD.md` | Adapter locations, loading and limitations |
+| `docs/REPRODUCIBILITY.md` | CPU audit and fresh-run commands |
+| `notebooks/Review.ipynb` | Lightweight evidence review |
+| `provenance/` | Historical notebooks and executed source |
+| `halo_native/` | Prepared native Halo recipe; **not executed** |
+| `tests/`, `.github/workflows/` | Offline regression and evidence checks |
 
-Use the same GPU for E0/E1, including the same visible device. Evaluation is single-example greedy generation; timing includes generation and device synchronization, excludes loading and tokenization; peak allocated GPU memory includes model weights. Output token counts include generated stop tokens. A 384-token cap is the initial setting. If a smoke run reveals excessive truncation or a bug, correct the protocol before full validation and apply the new settings to all arms.
+## Status and intended use
 
-## Evidence and limitations
-
-No accuracy, speedup, VRAM or training claims until the actual GPU results exist. Record the data manifest, metrics, predictions, training logs, package versions, adapter hash and commit. The dataset is public and may have appeared in the pretrained model's training corpus. Disjoint row IDs protect against direct experimental split reuse, not semantic duplicates or pretraining contamination. Numeric scoring does not validate reasoning steps or calibration. The synthetic tests verify the software, not mathematical ability.
-
-Do not commit raw datasets, weight binaries or credentials. Review base model and dataset licenses and contributor ownership before publication. Third-party sources: [Qwen model card](https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct), [GSM8K](https://huggingface.co/datasets/openai/gsm8k), [TRL SFT 0.17](https://huggingface.co/docs/trl/v0.17.0/sft_trainer), [TRL GRPO 0.17](https://huggingface.co/docs/trl/v0.17.0/grpo_trainer). No license is assigned to this project on the user's behalf.
+Research prototype, not a production math tutor or a claim of mathematical reasoning fidelity. One seed, one base model and one benchmark. E3 recorded a nonfinite gradient; final adapter weights were finite. Raw results are retained. The prepared Halo recipe is separate, not an executed native experiment. QLoRA was not run. Read [limitations](docs/ERROR_ANALYSIS.md), [contribution review](docs/CONTRIBUTIONS.md) and [third-party terms](docs/THIRD_PARTY.md) before sharing. No project-wide open-source license has been selected; private reviewer access is the default pending owner review.

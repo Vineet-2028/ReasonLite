@@ -8,7 +8,7 @@ import time
 from fractions import Fraction
 from pathlib import Path
 from .data import load_rows, messages, digest, dump_json
-from .scoring import grade
+from .scoring import grade, SCORING_VERSION
 
 def percentile(values, p):
     return sorted(values)[max(0, math.ceil(len(values)*p)-1)]
@@ -72,11 +72,11 @@ def main():
         for i,row in enumerate(rows):
             text, count, elapsed = generate(row['question'], a.max_new_tokens)
             r = {'id':row['id'], 'gold':row['gold'], 'output':text, 'tokens':count, 'seconds':elapsed,
-                 'hit_token_limit':count == a.max_new_tokens, **grade(text,Fraction(row['gold']))}
+                 'hit_token_limit':count == a.max_new_tokens, **grade(text,Fraction(row['gold']),truncated=count == a.max_new_tokens)}
             results.append(r); f.write(json.dumps(r, ensure_ascii=False)+'\n'); f.flush()
             if (i+1)%10 == 0 or i+1 == len(rows): print(f'{i+1}/{len(rows)}', flush=True)
     metrics = summarize(results)
-    metrics.update({'model':manifest['model'], 'model_revision':manifest['model_revision'], 'adapter':a.adapter,
+    metrics.update({'scoring_version':SCORING_VERSION,'model':manifest['model'], 'model_revision':manifest['model_revision'], 'adapter':a.adapter,
                     'adapter_sha256':digest(Path(a.adapter)/'adapter_model.safetensors') if a.adapter else None,
                     'split':a.split, 'split_sha256':manifest['files'][a.split]['sha256'], 'data_manifest_sha256':digest(Path(a.data)/'manifest.json'),
                     'max_new_tokens':a.max_new_tokens, 'decoding':'greedy', 'batch_size':1, 'warmup':1,

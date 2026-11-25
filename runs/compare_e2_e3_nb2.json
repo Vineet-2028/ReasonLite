@@ -1,0 +1,12 @@
+{
+  "before": "/kaggle/working/ReasonLite/runs/e2_validation_v1",
+  "after": "/kaggle/working/ReasonLite/runs/e3_validation_v1",
+  "n": 128,
+  "accuracy_delta_percentage_points": -3.90625,
+  "strict_accuracy_delta_percentage_points": -3.125,
+  "mean_tokens_delta": -5.296875,
+  "wrong_to_correct": 5,
+  "correct_to_wrong": 10,
+  "both_correct": 53,
+  "both_wrong": 60
+}

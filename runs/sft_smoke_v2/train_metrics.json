@@ -1,0 +1,38 @@
+{
+  "model_revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+  "data_manifest_sha256": "3fcde5df1054b269cc4aa4b755e499848564f62d4532e6acde9379e653aa533c",
+  "sft_split_sha256": "f03bbf8d1d830d0b085e47635111f4f61d2b28da54bd2667efbbd722c2966990",
+  "configuration": {
+    "rank": 8,
+    "alpha": 16,
+    "dropout": 0.05,
+    "target_modules": [
+      "q_proj",
+      "k_proj",
+      "v_proj",
+      "o_proj"
+    ],
+    "epochs": 1,
+    "batch_size": 2,
+    "gradient_accumulation": 8,
+    "learning_rate": 0.0002,
+    "max_length": 768
+  },
+  "max_steps": 2,
+  "examples_used": 512,
+  "skipped_ids": [],
+  "trainable_parameters": 1081344,
+  "total_parameters": 495114112,
+  "train_seconds": 11.44049469399988,
+  "peak_allocated_gpu_mib": 2179.21337890625,
+  "gpu": "Tesla T4",
+  "torch": "2.11.0+cu130",
+  "precision": "bf16",
+  "trainer_metrics": {
+    "train_runtime": 11.012,
+    "train_samples_per_second": 2.906,
+    "train_steps_per_second": 0.182,
+    "total_flos": 16597774127616.0,
+    "train_loss": 0.631450355052948
+  }
+}

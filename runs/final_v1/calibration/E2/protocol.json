@@ -1,0 +1,27 @@
+{
+  "arm": "E2",
+  "split": "validation",
+  "n": 16,
+  "split_sha256": "f9bde6d608f710bcc967d2a46203e810dfab3310fe6d63d25a7136897b7fe155",
+  "protocol_sha256": "893fced598b5dcabc2e35ca15e2048ba5df9937ab560f669031464db64d4d9c3",
+  "model_revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+  "adapter_sha256": "10a0722e6dbb1eacddf1fa04d1d001835c3050c5363d406545b2ecdc252ed160",
+  "scoring_version": "final-answer-v2",
+  "batch_size": 16,
+  "max_new_tokens": 384,
+  "decoding": "greedy",
+  "dtype": "torch.float16",
+  "device": "cuda",
+  "gpu": "Tesla T4",
+  "torch": "2.11.0+cu130",
+  "transformers": "4.51.3",
+  "peft": "0.15.2",
+  "python": "3.13.16",
+  "eos_token_ids": [
+    151645,
+    151643
+  ],
+  "pad_token_id": 151643,
+  "attention_implementation": "sdpa",
+  "timing": "synchronized batch wall time; per-example seconds are amortized, not request latency"
+}

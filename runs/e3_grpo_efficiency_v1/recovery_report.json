@@ -1,0 +1,14 @@
+{
+  "source": "/kaggle/working/ReasonLite/runs/e3_grpo_efficiency_v1/checkpoints/checkpoint-64/trainer_state.json",
+  "reason": "Nonfinite value blocked JSON export",
+  "nonfinite_observations": [
+    {
+      "path": "root[27].grad_norm",
+      "original_value": "nan"
+    }
+  ],
+  "adapter_weights_finite": true,
+  "adapter_hash_verified": true,
+  "changed_adapter_values": 1081343,
+  "training_repeated": false
+}

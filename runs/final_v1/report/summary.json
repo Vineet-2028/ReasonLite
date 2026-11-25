@@ -1,0 +1,304 @@
+{
+  "metrics": {
+    "E0": {
+      "n": 1319,
+      "correct": 512,
+      "accuracy": 0.38817285822592873,
+      "wilson_95": [
+        0.3622339926461102,
+        0.4147612035408985
+      ],
+      "strict_accuracy": 0.0,
+      "invalid_rate": 0.23351023502653523,
+      "format_rate": 0.0,
+      "mean_tokens": 282.53601213040184,
+      "correct_per_1000_generated_tokens": 1.3738880764225243,
+      "token_limit_rate": 0.16982562547384383,
+      "amortized_seconds_per_question": 0.6415640731819517,
+      "p95_amortized_seconds_per_question": 0.6501277725625414,
+      "arm": "E0",
+      "split": "test",
+      "split_sha256": "0c08044cb409bb6a63429e3dba31964a76a894eed39354486a51c6d46b34f559",
+      "protocol_sha256": "893fced598b5dcabc2e35ca15e2048ba5df9937ab560f669031464db64d4d9c3",
+      "model_revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+      "adapter_sha256": null,
+      "scoring_version": "final-answer-v2",
+      "batch_size": 16,
+      "max_new_tokens": 384,
+      "decoding": "greedy",
+      "dtype": "torch.float16",
+      "device": "cuda",
+      "gpu": "Tesla T4",
+      "torch": "2.11.0+cu130",
+      "transformers": "4.51.3",
+      "peft": "0.15.2",
+      "python": "3.13.16",
+      "eos_token_ids": [
+        151645,
+        151643
+      ],
+      "pad_token_id": 151643,
+      "attention_implementation": "sdpa",
+      "timing": "synchronized batch wall time; per-example seconds are amortized, not request latency",
+      "generation_wall_seconds": 846.2230125269944,
+      "questions_per_second": 1.5586907711965872,
+      "peak_allocated_gpu_mib": 1130.3359375,
+      "predictions_sha256": "c50bcdd6a070649467f8b9fc0b45a82bd0f41487a0bada25e8893b2d359ce040"
+    },
+    "E1": {
+      "n": 1319,
+      "correct": 394,
+      "accuracy": 0.2987111448066717,
+      "wilson_95": [
+        0.2746244748427665,
+        0.32396687829384924
+      ],
+      "strict_accuracy": 0.29567854435178165,
+      "invalid_rate": 0.04245640636846093,
+      "format_rate": 0.9492039423805914,
+      "mean_tokens": 119.27975739196361,
+      "correct_per_1000_generated_tokens": 2.504290345134431,
+      "token_limit_rate": 0.008339651250947688,
+      "amortized_seconds_per_question": 0.7332131718847559,
+      "p95_amortized_seconds_per_question": 1.0672686285624877,
+      "arm": "E1",
+      "split": "test",
+      "split_sha256": "0c08044cb409bb6a63429e3dba31964a76a894eed39354486a51c6d46b34f559",
+      "protocol_sha256": "893fced598b5dcabc2e35ca15e2048ba5df9937ab560f669031464db64d4d9c3",
+      "model_revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+      "adapter_sha256": "5d885ada194f925c2f0ab34a25c503679e47c450b8d32009e775d34c2528360b",
+      "scoring_version": "final-answer-v2",
+      "batch_size": 16,
+      "max_new_tokens": 384,
+      "decoding": "greedy",
+      "dtype": "torch.float16",
+      "device": "cuda",
+      "gpu": "Tesla T4",
+      "torch": "2.11.0+cu130",
+      "transformers": "4.51.3",
+      "peft": "0.15.2",
+      "python": "3.13.16",
+      "eos_token_ids": [
+        151645,
+        151643
+      ],
+      "pad_token_id": 151643,
+      "attention_implementation": "sdpa",
+      "timing": "synchronized batch wall time; per-example seconds are amortized, not request latency",
+      "generation_wall_seconds": 967.108173715993,
+      "questions_per_second": 1.363859840964746,
+      "peak_allocated_gpu_mib": 1134.4609375,
+      "predictions_sha256": "987b9482ca6c8c9483597e94ba54045d30dfb9f7f2b1194fd62c41065b5fb900"
+    },
+    "E2": {
+      "n": 1319,
+      "correct": 399,
+      "accuracy": 0.3025018953752843,
+      "wilson_95": [
+        0.27831566646882344,
+        0.32783517154280895
+      ],
+      "strict_accuracy": 0.2918877937831691,
+      "invalid_rate": 0.04321455648218342,
+      "format_rate": 0.9363153904473086,
+      "mean_tokens": 127.14859742228961,
+      "correct_per_1000_generated_tokens": 2.3791209774072946,
+      "token_limit_rate": 0.012130401819560273,
+      "amortized_seconds_per_question": 0.7552508316103127,
+      "p95_amortized_seconds_per_question": 1.0513515971875904,
+      "arm": "E2",
+      "split": "test",
+      "split_sha256": "0c08044cb409bb6a63429e3dba31964a76a894eed39354486a51c6d46b34f559",
+      "protocol_sha256": "893fced598b5dcabc2e35ca15e2048ba5df9937ab560f669031464db64d4d9c3",
+      "model_revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+      "adapter_sha256": "10a0722e6dbb1eacddf1fa04d1d001835c3050c5363d406545b2ecdc252ed160",
+      "scoring_version": "final-answer-v2",
+      "batch_size": 16,
+      "max_new_tokens": 384,
+      "decoding": "greedy",
+      "dtype": "torch.float16",
+      "device": "cuda",
+      "gpu": "Tesla T4",
+      "torch": "2.11.0+cu130",
+      "transformers": "4.51.3",
+      "peft": "0.15.2",
+      "python": "3.13.16",
+      "eos_token_ids": [
+        151645,
+        151643
+      ],
+      "pad_token_id": 151643,
+      "attention_implementation": "sdpa",
+      "timing": "synchronized batch wall time; per-example seconds are amortized, not request latency",
+      "generation_wall_seconds": 996.1758468940025,
+      "questions_per_second": 1.3240634212448914,
+      "peak_allocated_gpu_mib": 1134.4609375,
+      "predictions_sha256": "6bda46686d5482a31e2a3121844339e2366449c696dfb2bcb999235ddd408b23"
+    },
+    "E3": {
+      "n": 1319,
+      "correct": 399,
+      "accuracy": 0.3025018953752843,
+      "wilson_95": [
+        0.27831566646882344,
+        0.32783517154280895
+      ],
+      "strict_accuracy": 0.2987111448066717,
+      "invalid_rate": 0.05307050796057622,
+      "format_rate": 0.9378316906747536,
+      "mean_tokens": 117.80363912054587,
+      "correct_per_1000_generated_tokens": 2.567848477632688,
+      "token_limit_rate": 0.008339651250947688,
+      "amortized_seconds_per_question": 0.6894754176027246,
+      "p95_amortized_seconds_per_question": 1.0157340025000394,
+      "arm": "E3",
+      "split": "test",
+      "split_sha256": "0c08044cb409bb6a63429e3dba31964a76a894eed39354486a51c6d46b34f559",
+      "protocol_sha256": "893fced598b5dcabc2e35ca15e2048ba5df9937ab560f669031464db64d4d9c3",
+      "model_revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+      "adapter_sha256": "e1c45de45494bbb603a43ea9418739104ce5a16ab5bb1f714385caabff1e0875",
+      "scoring_version": "final-answer-v2",
+      "batch_size": 16,
+      "max_new_tokens": 384,
+      "decoding": "greedy",
+      "dtype": "torch.float16",
+      "device": "cuda",
+      "gpu": "Tesla T4",
+      "torch": "2.11.0+cu130",
+      "transformers": "4.51.3",
+      "peft": "0.15.2",
+      "python": "3.13.16",
+      "eos_token_ids": [
+        151645,
+        151643
+      ],
+      "pad_token_id": 151643,
+      "attention_implementation": "sdpa",
+      "timing": "synchronized batch wall time; per-example seconds are amortized, not request latency",
+      "generation_wall_seconds": 909.4180758179937,
+      "questions_per_second": 1.4503780330224907,
+      "peak_allocated_gpu_mib": 1134.4609375,
+      "predictions_sha256": "74c3911208068e0ff7582ee1eea02350942139eef64d1e133b90735fb89f47ed"
+    }
+  },
+  "comparisons": [
+    {
+      "before": "E0",
+      "after": "E1",
+      "n": 1319,
+      "wrong_to_correct": 153,
+      "correct_to_wrong": 271,
+      "accuracy_delta_pp": -8.946171341925702,
+      "mcnemar_p": 1.0781066377271484e-08,
+      "mean_token_delta": -163.2562547384382,
+      "holm_p": 6.468639826362891e-08
+    },
+    {
+      "before": "E0",
+      "after": "E2",
+      "n": 1319,
+      "wrong_to_correct": 154,
+      "correct_to_wrong": 267,
+      "accuracy_delta_pp": -8.567096285064443,
+      "mcnemar_p": 4.0083357773584616e-08,
+      "mean_token_delta": -155.3874147081122,
+      "holm_p": 1.6033343109433847e-07
+    },
+    {
+      "before": "E0",
+      "after": "E3",
+      "n": 1319,
+      "wrong_to_correct": 147,
+      "correct_to_wrong": 260,
+      "accuracy_delta_pp": -8.567096285064443,
+      "mcnemar_p": 2.316978200667339e-08,
+      "mean_token_delta": -164.73237300985596,
+      "holm_p": 1.1584891003336696e-07
+    },
+    {
+      "before": "E1",
+      "after": "E2",
+      "n": 1319,
+      "wrong_to_correct": 73,
+      "correct_to_wrong": 68,
+      "accuracy_delta_pp": 0.37907505686125853,
+      "mcnemar_p": 0.7363564588511882,
+      "mean_token_delta": 7.868840030326004,
+      "holm_p": 1.0
+    },
+    {
+      "before": "E1",
+      "after": "E3",
+      "n": 1319,
+      "wrong_to_correct": 63,
+      "correct_to_wrong": 58,
+      "accuracy_delta_pp": 0.37907505686125853,
+      "mcnemar_p": 0.7162941145766412,
+      "mean_token_delta": -1.4761182714177408,
+      "holm_p": 1.0
+    },
+    {
+      "before": "E2",
+      "after": "E3",
+      "n": 1319,
+      "wrong_to_correct": 63,
+      "correct_to_wrong": 63,
+      "accuracy_delta_pp": 0.0,
+      "mcnemar_p": 1.0,
+      "mean_token_delta": -9.344958301743745,
+      "holm_p": 1.0
+    }
+  ],
+  "calibration": {
+    "E0": {
+      "n": 16,
+      "exact_text_agreement": 0.9375,
+      "correctness_agreement": 1.0,
+      "batched_accuracy": 0.5,
+      "original_accuracy": 0.5
+    },
+    "E1": {
+      "n": 16,
+      "exact_text_agreement": 0.875,
+      "correctness_agreement": 1.0,
+      "batched_accuracy": 0.4375,
+      "original_accuracy": 0.4375
+    },
+    "E2": {
+      "n": 16,
+      "exact_text_agreement": 0.9375,
+      "correctness_agreement": 1.0,
+      "batched_accuracy": 0.3125,
+      "original_accuracy": 0.3125
+    },
+    "E3": {
+      "n": 16,
+      "exact_text_agreement": 0.875,
+      "correctness_agreement": 0.9375,
+      "batched_accuracy": 0.4375,
+      "original_accuracy": 0.375
+    }
+  },
+  "grpo_diagnostics": {
+    "E2": {
+      "rollouts": 256,
+      "all_wrong_groups": 35,
+      "all_correct_groups": 3,
+      "variable_reward_groups": 26,
+      "nonfinite_gradient_steps": [],
+      "training_seconds": 747.6118540799998
+    },
+    "E3": {
+      "rollouts": 256,
+      "all_wrong_groups": 31,
+      "all_correct_groups": 5,
+      "variable_reward_groups": 29,
+      "nonfinite_gradient_steps": [
+        28
+      ],
+      "training_seconds": 701.3422630269997
+    }
+  },
+  "primary_candidate_selected_on_validation": "E1",
+  "halo_native_status": "separate experiment; no execution claimed"
+}

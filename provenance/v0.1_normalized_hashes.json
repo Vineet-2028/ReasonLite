@@ -1,0 +1,16 @@
+{
+  ".github/workflows/tests.yml": "071bdd06a4b7d80ab393b6e2b4c9881890a67c552c968ddc1b59f81494884d72",
+  ".gitignore": "bb022868c7a53f09186ccf83f55986052d1bea2ca058c45a5a97a70aa701d71e",
+  "README.md": "b1c5c4742c072a76b4a7f40b67b4bb155f4e382128150f634a8db6bcffa7907b",
+  "ReasonLite_Colab.ipynb": "3a625179796967940377501515be7bacb98002272dd7087771abb914b3f6b45a",
+  "configs/sft.json": "de1496ac8ad691cc1e2dd6c0d01cb8f10c35479f95524d2e89f30455e3f36401",
+  "docs/PROTOCOL.md": "331a33aec8ce6265ac0a70067a8ddcc3b377bf1e2e078db02ed9822d5f9bb739",
+  "reasonlite/__init__.py": "9ba6bd5d3f73bbc7de4c67d9856e413a2bb6be566216705d4c4cc2c79e021042",
+  "reasonlite/compare.py": "d1449dd09b14536b07adb9c3edd204f33cf0db7c95fdf4d4ad8f70c4361f7e15",
+  "reasonlite/data.py": "ec69bc7888bbd916b49f39feba9752969fb5315d7be6e1eeaae5e30852ab2c21",
+  "reasonlite/evaluate.py": "4eba29b0810e7339513d44d08d88b2cf1127e03714fb8d8ea1fe4df9cbe77006",
+  "reasonlite/scoring.py": "9fa42d90fc6efefc1739de516b243c186e85ab64e54583bb9fcd5bf95f59782a",
+  "reasonlite/train_sft.py": "a5547ff0be968fbfaea1c399abff996e06f1dc812ad6249e996482121add6685",
+  "requirements.txt": "d7b5874887f362bac4686bbb86435975ea277eabd783f609601932290defbd49",
+  "tests/test_core.py": "e234f95be2fc9542ae2d0e2acb738f5fd48b2c094ccacface50c78dd910456e8"
+}
